@@ -2,14 +2,14 @@ import cv2
 import numpy as np
 
 # Load camera matrix and distortion coefficients
-camera_matrix = np.load('2d/camera_matrix.npy')
-dist_coeffs = np.load('2d/dist_coeffs.npy')
+camera_matrix = np.load('2d_checkboard/camera_matrix.npy')
+dist_coeffs = np.load('2d_checkboard/dist_coeffs.npy')
 print("camera_matrix:",camera_matrix)
 print("dist_coeffs:", dist_coeffs)
 
 # Load images taken from different angles
-image1 = cv2.imread('group1.jpg') #rectified_left_image.jpg
-image2 = cv2.imread('group2.jpg') #rectified_right_image.jpg
+image1 = cv2.imread('images/group1.jpg') #rectified_left_image.jpg
+image2 = cv2.imread('images/group2.jpg') #rectified_right_image.jpg
 
 #-------------------------------------------------#
 

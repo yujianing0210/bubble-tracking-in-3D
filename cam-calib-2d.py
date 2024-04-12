@@ -12,7 +12,7 @@ image_points = []
 
 # 读取标定板图像并查找角点
 for i in range(15):
-    image_path = f'2d/2d-{i}.JPG'
+    image_path = f'2d_checkerboard/2d-{i}.JPG'
     image = cv2.imread(image_path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 

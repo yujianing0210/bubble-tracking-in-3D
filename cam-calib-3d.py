@@ -11,7 +11,7 @@ image_points = []
 
 # 逐一读取图像并查找角点
 for i in range(10):
-    image_path = f'3d/3d-{i}.jpg'
+    image_path = f'3d_checkerboard/3d-{i}.jpg'
     image = cv2.imread(image_path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 

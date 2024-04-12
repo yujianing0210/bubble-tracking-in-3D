@@ -1,7 +1,7 @@
 import cv2
 
-frame1 = cv2.imread('group1.jpg') 
-frame2 = cv2.imread('group2.jpg')
+frame1 = cv2.imread('images/group1.jpg') 
+frame2 = cv2.imread('images/group2.jpg')
 
 frame1_new = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
 frame2_new = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)

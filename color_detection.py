@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Load the image
-image = cv2.imread('angle1.jpg')
+image = cv2.imread('images/angle1.jpg')
 
 # Convert the image from BGR to HSV color space
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
