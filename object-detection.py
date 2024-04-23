@@ -4,9 +4,9 @@ import cv2
 import numpy as np
 
 # Load the YOLOv8 model
-model = YOLO('yolov8-ultralytics/runs/detect/train2/weights/best.pt')
+model = YOLO('ultralytics-main/runs/detect/train2/weights/best.pt')
 
-# Open the video file
+# Open the image
 video_path = "testing-r2/videos/C0007.MP4"
 output_path = "testing-r2/videos/C0007-output.MP4"
 cap = cv2.VideoCapture(video_path)
