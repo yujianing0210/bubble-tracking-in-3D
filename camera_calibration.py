@@ -14,13 +14,13 @@ criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
 objp = np.zeros((7*7,3), np.float32)
 
-#multiply by 1000 to account for 1000 mm per square in grid (???)
+#multiply by 2000 to account for 2m per square in grid (???)
 objp[:,:2] = np.mgrid[0:7,0:7].T.reshape(-1,2)*2000
 
 # Arrays to store object points and image points from all the images.
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
-images = glob.glob('camera_captures/*.jpg')
+images = glob.glob('camera_captures/SceneB_Cam1/*.jpg')
 
 win_name="Camera Captures"
 cv2.namedWindow(win_name, cv2.WND_PROP_FULLSCREEN)
@@ -53,21 +53,21 @@ ret, cam_mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gra
 #print(ret)
 print("Camera Matrix")
 print(cam_mtx)
-np.save(savedir+'/camera_matrix.npy', cam_mtx)
+np.save(savedir+'/SceneB_Cam1/camera_matrix.npy', cam_mtx)
 
 print("Distortion Coeff")
 print(dist)
-np.save(savedir+'/dist_coeffs.npy', dist)
+np.save(savedir+'/SceneB_Cam1/dist_coeffs.npy', dist)
 
-print("r vecs")
-print(rvecs[2])
+# print("r vecs")
+# print(rvecs[2])
 
-print("t Vecs")
-print(tvecs[2])
+# print("t Vecs")
+# print(tvecs[2])
 
 print(">==> Calibration ended")
 
-img1 = cv2.imread('camera_captures/12.jpg')
+img1 = cv2.imread('camera_captures/SceneB_Cam1/SceneB_Cam1_20.jpg')
 
 h,  w = img1.shape[:2]
 print("Image Width, Height")
@@ -79,12 +79,12 @@ newcam_mtx, roi=cv2.getOptimalNewCameraMatrix(cam_mtx, dist, (w,h), 1, (w,h))
 
 print("Region of Interest")
 print(roi)
-np.save(savedir+'/roi.npy', roi)
+np.save(savedir+'/SceneB_Cam1/roi.npy', roi)
 
 print("New Camera Matrix")
 #print(newcam_mtx)
-np.save(savedir+'/NEW_camera_matrix.npy', newcam_mtx)
-print(np.load(savedir+'/NEW_camera_matrix.npy'))
+np.save(savedir+'/SceneB_Cam1/NEW_camera_matrix.npy', newcam_mtx)
+print(np.load(savedir+'/SceneB_Cam1/NEW_camera_matrix.npy'))
 
 inverse = np.linalg.inv(newcam_mtx)
 print("Inverse New Camera Matrix")
