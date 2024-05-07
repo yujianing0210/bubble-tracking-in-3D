@@ -20,7 +20,7 @@ objp[:,:2] = np.mgrid[0:7,0:7].T.reshape(-1,2)*2000
 # Arrays to store object points and image points from all the images.
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
-images = glob.glob('camera_captures/SceneB_Cam1/*.jpg')
+images = glob.glob('camera_captures/SceneB_Cam1_sync/*.png')
 
 win_name="Camera Captures"
 cv2.namedWindow(win_name, cv2.WND_PROP_FULLSCREEN)
@@ -53,11 +53,11 @@ ret, cam_mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gra
 #print(ret)
 print("Camera Matrix")
 print(cam_mtx)
-np.save(savedir+'/SceneB_Cam1/camera_matrix.npy', cam_mtx)
+np.save(savedir+'/SceneB_Cam1_sync/camera_matrix.npy', cam_mtx)
 
 print("Distortion Coeff")
 print(dist)
-np.save(savedir+'/SceneB_Cam1/dist_coeffs.npy', dist)
+np.save(savedir+'/SceneB_Cam1_sync/dist_coeffs.npy', dist)
 
 # print("r vecs")
 # print(rvecs[2])
@@ -67,7 +67,7 @@ np.save(savedir+'/SceneB_Cam1/dist_coeffs.npy', dist)
 
 print(">==> Calibration ended")
 
-img1 = cv2.imread('camera_captures/SceneB_Cam1/SceneB_Cam1_20.jpg')
+img1 = cv2.imread('camera_captures/SceneB_Cam1_sync/13.png')
 
 h,  w = img1.shape[:2]
 print("Image Width, Height")
@@ -79,12 +79,12 @@ newcam_mtx, roi=cv2.getOptimalNewCameraMatrix(cam_mtx, dist, (w,h), 1, (w,h))
 
 print("Region of Interest")
 print(roi)
-np.save(savedir+'/SceneB_Cam1/roi.npy', roi)
+np.save(savedir+'/SceneB_Cam1_sync/roi.npy', roi)
 
 print("New Camera Matrix")
 #print(newcam_mtx)
-np.save(savedir+'/SceneB_Cam1/NEW_camera_matrix.npy', newcam_mtx)
-print(np.load(savedir+'/SceneB_Cam1/NEW_camera_matrix.npy'))
+np.save(savedir+'/SceneB_Cam1_sync/NEW_camera_matrix.npy', newcam_mtx)
+print(np.load(savedir+'/SceneB_Cam1_sync/NEW_camera_matrix.npy'))
 
 inverse = np.linalg.inv(newcam_mtx)
 print("Inverse New Camera Matrix")
@@ -98,8 +98,10 @@ undst = cv2.undistort(img1, cam_mtx, dist, None, newcam_mtx)
 #dst = dst[y:y+h, x:x+w]
 #cv2.circle(dst,(308,160),5,(0,255,0),2)
 cv2.imshow('img1', img1)
+cv2.imwrite(savedir+'/SceneB_Cam1_sync/before.png',img1)
 cv2.waitKey(5000)      
 cv2.destroyAllWindows()
 cv2.imshow('img1', undst)
+cv2.imwrite(savedir+'/SceneB_Cam1_sync/after.png',undst)
 cv2.waitKey(5000)      
 cv2.destroyAllWindows()
